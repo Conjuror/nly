@@ -1,3 +1,11 @@
 * {
-    font-size: 16px;
+    font-size: 48px;
+}
+
+div.control-panel {
+    z-index: 0;
+}
+
+#img{
+    visibility: hidden;
 }

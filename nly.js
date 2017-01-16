@@ -1,29 +1,19 @@
 
-var loadFile = function(event) {
-    var preview = document.getElementById('preview');
-    preview.src = URL.createObjectURL(event.target.files[0]);
-}
-
 var saveFile = function(event) {
-    console.log("save file clicked");
-
-    console.log("preview link: " + $("#preview")[0].currentSrc);
     console.log("save file " + $("#file_name")[0].value);
 
-    if ($("#preview")[0].currentSrc == "" || $("#file_name")[0].value == "") {
-        alert("設定檔名，照相，然後按 I DO");
+    if (event.target.files[0] == "" || $("#file_name")[0].value == "") {
+        alert("設定檔名，然後照相");
         return;
     }
 
     var link = document.createElement("a");
-    link.setAttribute("href", $("#preview")[0].currentSrc);
+    link.setAttribute("href", URL.createObjectURL(event.target.files[0]));
     link.setAttribute("download", $("#file_name")[0].value);
 
     link.click();
 
-    $("#file_name")[0].value = $("#file_name")[0].value.replace(/\d+/gi, function(x){return parseInt(x)+1;});
-
-    $("#preview").remove();
-    var newImg = $('<img id="preview">');
-    newImg.appendTo($('body'));
+    $("#file_name")[0].value = $("#file_name")[0].value.replace(/\d+/gi, function(x){
+        return ("00000"+(parseInt(x)+1).toString()).substr(-5);
+    });
 }
